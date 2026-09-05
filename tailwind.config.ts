@@ -51,8 +51,8 @@ const config: Config = {
       boxShadow: {
         card: "0 4px 12px rgba(0, 0, 0, 0.2)",
         cardHover: "0 8px 24px rgba(0, 0, 0, 0.3)",
-        accent: "0 4px 16px rgba(var(--color-accent), 0.3)",
-        accentHover: "0 6px 24px rgba(var(--color-accent), 0.4)",
+        accent: "0 4px 16px rgb(var(--color-accent) / 0.3)",
+        accentHover: "0 6px 24px rgb(var(--color-accent) / 0.4)",
       },
       animation: {
         "fade-in": "fadeIn 0.3s ease-out",

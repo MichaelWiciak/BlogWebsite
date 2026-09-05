@@ -105,6 +105,22 @@ function listPostFiles(): string[] {
     .filter((file) => /\.mdx?$/.test(file));
 }
 
+/** Fail the build if two files would resolve to the same slug/route. */
+function assertUniqueSlugs(files: string[]): void {
+  const bySlug = new Map<string, string>();
+  for (const file of files) {
+    const { slug } = parseFilename(file);
+    const existing = bySlug.get(slug);
+    if (existing) {
+      throw new Error(
+        `Duplicate slug "${slug}" — "${existing}" and "${file}" would map to ` +
+          "the same URL. Rename one of them so every post gets a unique route.",
+      );
+    }
+    bySlug.set(slug, file);
+  }
+}
+
 function toPublicPost(post: InternalPost): Post {
   const { fileName: _fileName, published: _published, ...meta } = post;
   return meta;
@@ -117,7 +133,10 @@ function toSummaryPost(post: Post): Post {
 }
 
 export function getAllPosts(): Post[] {
-  const posts = listPostFiles()
+  const files = listPostFiles();
+  assertUniqueSlugs(files);
+
+  const posts = files
     .map(readPostFile)
     .filter((post) => post.published)
     .sort(
@@ -139,11 +158,14 @@ export function getAllTags(): string[] {
   return [...tags].sort();
 }
 
-/** Returns any post (including unpublished drafts) by its slug. */
+/** Returns a published post by its slug. Unpublished drafts are never exposed. */
 export function getPostBySlug(slug: string): Post | null {
-  const match = listPostFiles().find(
-    (fileName) => parseFilename(fileName).slug === slug,
+  const fileName = listPostFiles().find(
+    (file) => parseFilename(file).slug === slug,
   );
-  if (!match) return null;
-  return toPublicPost(readPostFile(match));
+  if (!fileName) return null;
+
+  const post = readPostFile(fileName);
+  if (!post.published) return null;
+  return toPublicPost(post);
 }

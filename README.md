@@ -10,8 +10,8 @@ Software engineering blog deployed at https://blog.michaelwiciak.com on Vercel.
 
 - **Math:** KaTeX. Inline `$...$`, display `$$...$$`.
 - **Code:** fenced code blocks get syntax highlighting automatically.
-- **Drafts:** set `published: false` to keep a post out of the list and sitemap
-  while you write it.
+- **Drafts:** set `published: false` to hide a post from the list, sitemap, and
+  URL while you write it.
 
 ## Tech stack
 

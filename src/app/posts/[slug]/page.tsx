@@ -15,6 +15,9 @@ interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
+/** Only prerendered slugs are served — anything else returns a 404. */
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return getAllSlugs().map((slug) => ({ slug }));
 }
