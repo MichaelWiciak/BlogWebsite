@@ -3,6 +3,7 @@ title: "Welcome to the Blog"
 date: 2026-09-01
 excerpt: "Every file in content/posts/ becomes a page. No CMS, no manual routes — just markdown, maths, and static generation."
 tags: [markdown, nextjs, meta]
+published: false
 ---
 
 ## How this blog works
@@ -42,10 +43,10 @@ curl -s "https://api.github.com/repos/MichaelWiciak/PersonalWebiste" \
 
 ## GFM tables
 
-| Language | Paradigm   | Fun |
-|----------|------------|-----|
-| Rust     | Systems    | yes |
-| Python   | Scripting  | yes |
+| Language | Paradigm   | Fun      |
+| -------- | ---------- | -------- |
+| Rust     | Systems    | yes      |
+| Python   | Scripting  | yes      |
 | Haskell  | Functional | also yes |
 
 ## Blockquotes
@@ -58,3 +59,4 @@ curl -s "https://api.github.com/repos/MichaelWiciak/PersonalWebiste" \
 - Strikethrough: ~~not shipped~~
 - Links: [visit the main site](https://michaelwiciak.com)
 - Images: standard markdown `![alt](url)`, rounded + shadowed via CSS
+

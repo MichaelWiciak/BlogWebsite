@@ -2,6 +2,7 @@
 title: "Filename Conventions"
 excerpt: "Date-prefixed filenames mean the build can infer dates and slugs from the file name alone."
 tags: [meta]
+published: false
 ---
 
 ## Name a file with a date
@@ -16,3 +17,4 @@ frontmatter.
 
 Set `published: false` in frontmatter to keep a post out of the list, the
 sitemap, and its URL while you write it.
+
