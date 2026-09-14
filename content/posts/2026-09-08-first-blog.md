@@ -16,3 +16,4 @@ Ideas:
 - anything cool i learn through hackthebox
 - randwallpaper blogs?
 - longest tree idea? lets do it.
+- whats up with Garden cities, whats up with them? i got pictures.
