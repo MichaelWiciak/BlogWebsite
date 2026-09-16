@@ -1,6 +1,5 @@
 ---
 title: "The Longest Path in a Graph"
-date: 2026-09-13
 excerpt: "What happens when we run Shortest-Path Logic backwards"
 tags: [algorithms, math, graph-theory, python]
 published: true

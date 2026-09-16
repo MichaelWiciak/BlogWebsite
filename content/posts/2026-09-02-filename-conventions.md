@@ -13,6 +13,9 @@ That's how this very post gets its slug (`filename-conventions`) and its date
 (`2026-09-02`): the date prefix means neither one needs a `date` field in the
 frontmatter.
 
+The date prefix is enforced at build time — a file without one fails the build
+instead of silently falling back to a wrong date.
+
 ## Drafting
 
 Set `published: false` in frontmatter to keep a post out of the list, the
