@@ -1,16 +1,14 @@
 import fs from "node:fs";
 import path from "node:path";
-import { execSync } from "node:child_process";
 import matter from "gray-matter";
 import { estimateReadingTime } from "./reading-time";
 import type { Post } from "@/types/post";
 
 const POSTS_DIR = path.join(process.cwd(), "content", "posts");
-const DATE_PREFIX = /^(\d{4}-?\d{2}?-?\d{2}?)-(.*)$/;
+const DATE_PREFIX = /^(\d{4}-\d{2}-\d{2})-(.*)$/;
 
 interface PostFrontmatter {
   title?: string;
-  date?: string | Date;
   excerpt?: string;
   tags?: string[];
   published?: boolean;
@@ -61,21 +59,6 @@ function parseFilename(fileName: string): { slug: string; date?: string } {
   return { slug: base };
 }
 
-/** Last-resort date: the file's first git commit timestamp. */
-function inferDateFromGit(fileName: string): string {
-  try {
-    const gitDate = execSync(
-      `git log -1 --format=%cI -- "${path.join(POSTS_DIR, fileName)}"`,
-      { stdio: ["ignore", "pipe", "ignore"] },
-    )
-      .toString()
-      .trim();
-    return new Date(gitDate).toISOString().slice(0, 10);
-  } catch {
-    return new Date().toISOString().slice(0, 10);
-  }
-}
-
 function readPostFile(fileName: string): InternalPost {
   const filePath = path.join(POSTS_DIR, fileName);
   const raw = fs.readFileSync(filePath, "utf8");
@@ -83,12 +66,17 @@ function readPostFile(fileName: string): InternalPost {
   const fm = data as PostFrontmatter;
   const { slug, date: filenameDate } = parseFilename(fileName);
 
+  if (!filenameDate) {
+    throw new Error(
+      `"${fileName}" is missing a date prefix. ` +
+        'Rename the file to "YYYY-MM-DD-<slug>.md" so the date is derived from the filename.',
+    );
+  }
+
   return {
     slug,
     title: fm.title ?? slugToTitle(slug),
-    date: fm.date
-      ? normaliseDate(fm.date)
-      : filenameDate ?? inferDateFromGit(fileName),
+    date: filenameDate,
     excerpt: fm.excerpt ?? autoExcerpt(content),
     readingTime: estimateReadingTime(content),
     tags: Array.isArray(fm.tags) ? fm.tags.map(String) : [],

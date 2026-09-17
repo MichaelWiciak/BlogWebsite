@@ -15,9 +15,9 @@ export default function SearchBar({ value, onChange }: SearchBarProps) {
         type="search"
         value={value}
         onChange={(event) => onChange(event.target.value)}
-        placeholder="Search posts… try a title, tag, or keyword"
+        placeholder="Search posts"
         aria-label="Search posts"
-        className="w-full pl-12 pr-4 py-3 bg-surface rounded-full border border-white/10 text-text-primary placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent transition-colors duration-200"
+        className="w-full pl-12 pr-4 py-3 text-base bg-surface rounded-full border border-white/10 text-text-primary placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent transition-colors duration-200"
       />
     </div>
   );

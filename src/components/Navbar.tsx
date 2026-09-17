@@ -24,14 +24,6 @@ export default function Navbar() {
         >
           Main site
         </a>
-        <a
-          href="https://github.com/MichaelWiciak"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-text-muted hover:text-accent transition-colors"
-        >
-          Github
-        </a>
       </div>
     </nav>
   );
