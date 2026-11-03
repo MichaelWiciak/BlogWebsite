@@ -31,7 +31,7 @@ void swap_xor(int *x, int *y) {
 }
 ```
 
-Both produce the same output. Below I converted them into assembly (Intel Syntax):
+Both produce the same output. Below I added the assembly (Intel Syntax) output from the compiler:
 
 ```
 swap_temp:
@@ -59,7 +59,9 @@ They aren't identical! It must be a fluke, right? Well... I tested it on GCC 15 
 
 Why does it keep the chain? Because the swap touches memory, and what lands in memory is observable. The mixture $x \oplus y$ has to exist long enough to be written into `x`, so it has to be computed, and each `XOR` needs the previous one's result before it can run. The CPU has to wait.
 
-So does the flattening ever happen?. Same swap, but the values stay in variables, with nothing stored to memory:
+So does the flattening ever happen?
+
+Below is modified code for the same swap, but the values stay in variables, with nothing stored to memory:
 
 ```c
 int f_temp(int x, int y) {
@@ -95,8 +97,7 @@ As such, when the swap stays in registers, it costs nothing, and both versions b
 
 Write the plain version. Modern compiler's make obvious code disappear. Give it clever code and it takes it at face value and if your code isn't optimal, you pay the price.
 
-$(a \oplus b) \oplus b = a$ is a beautiful idea. However, it is not a swap strategy for real machines.
-The machine already has a free swap mechanism, and it is called a register.
+$(a \oplus b) \oplus b = a$ is a beautiful idea. However, it is not a swap strategy for real machine.
+The hardware already has a free swap mechanism, and it is called a register.
 
 Thanks for reading (:
-
