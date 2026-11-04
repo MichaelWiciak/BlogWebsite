@@ -1,12 +1,11 @@
-# Michael Wiciak — Blog
+# Blog Site for me
 
-Software engineering blog deployed at https://blog.michaelwiciak.com on Vercel.
+Blog deployed at https://blog.michaelwiciak.com on Vercel.
 
 ## Write a post
 
-1. Create a file in `content/posts/` — e.g. `2026-09-15-my-post.md`.
-2. Add frontmatter: `title` (and optionally `date`, `excerpt`, `tags`, `published`).
-3. Commit and push. Vercel rebuilds; the post is live at `/posts/my-post`.
+1. Create a file in `content/posts/`.
+2. Add frontmatter of `title`, `date`, `excerpt`, `tags`, and `published`.
 
 - **Math:** KaTeX. Inline `$...$`, display `$$...$$`.
 - **Code:** fenced code blocks get syntax highlighting automatically.
@@ -23,14 +22,13 @@ Vercel.
 
 ```bash
 npm install
-npm run dev      # http://localhost:3000
-npm run build    # production build (generates all static posts)
+npm run dev      
+npm run build
 npm run typecheck
 ```
 
 ## How pages are generated
 
 At build time, `src/lib/posts.ts` reads `content/posts/`, parses frontmatter,
-sorting newest → oldest. `generateStaticParams()` in
-`src/app/posts/[slug]/page.tsx` turns each file into a static route. No manual
-route or manifest maintenance.
+sorting newest to oldest. `generateStaticParams()` in
+`src/app/posts/[slug]/page.tsx` turns each file into a static route.
